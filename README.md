@@ -108,7 +108,7 @@ Para la realización de esta tarea utilizaremos, el antes mencionado servicio de
   <img src="image_workshop/download.png" width="722" length="500">
 </p>
 
-## Utilizando Watson Visual Recognition y creando el modelo clasificador multiclase
+## Crear el modelo clasificador multiclase
 
 Ir al catalogo de IBM, y seleccionar "AI".
 
@@ -116,34 +116,34 @@ Ir al catalogo de IBM, y seleccionar "AI".
 
 En las opciones que aparecen seleccionamos Watson Visual Recognition.
 
-[visual]
+![](/././image_workshop/visual.png)
 
 Asignamos un nombre a criterio del usuario y pulsamos en crear.\
 En el caso del ejemplo, se crea una instancia del servicio llamada Visual Recognition-faces.
 
-[reciencreado]
+![](/././image_workshop/reciencreado.png)
 
 Si vamos a la pestaña "Manage", encontramos las credenciales del servicio recién creado. Éstas serán utilizadas más adelante, cuando llamemos este servicio mediante la API que expone.
 
-[echo]
+![](/././image_workshop/echo.png)
 
 Para iniciar el servicio haremos click en "Create a custom Model", acción que nos enviará a Watson Studio.
 
-[wstudio]
+![](/././image_workshop/wstudio.png)
 
 Una vez allí, se pueden observar las diferentes opciones que nos brinda el servicio para modelar distintas necesidades. Para el propósito de este workshop elegiremos la opción "Classify Images" y crearemos un modelo de ese estilo.
 
-[create model]
+![](/././image_workshop/createmodel.png)
 
 Como prerrequisito se nos pedirá que creemos un proyecto en Watson Studio para albergar al modelo que estamos por crear.
 
-[proyecto]
+![](/././image_workshop/proyecto.png)
 
 Como nombre le asignaremos "workshop_visual_recognition" y lo creamos.
 
 En este punto estamos creando nuestro modelo con el que clasificaremos las imágenes. Para completar este paso será necesario asiganrle un nombre. Para mantener un orden en el trabajo llamaremos a este modelo "eyesclassifier".
 
-[model]
+![](/././image_workshop/model.png)
 
 Una vez que le pusimos nombre a nuestro modelo es hora de crear las clases de verdad. Como mencionamos previamente estas clases serán en las cuales nuestro modelo clasifique.
 Como en este caso queremos construir un clasificador binario identificando caras con los ojos cerrados y caras con los ojos abiertos, solo necesitaremos definir una clase, particularmente denotando los casos en los cuales se encuentra en la imagen una persona con los ojos cerrados. A dicha clase la llamaremos, valga la redundancia, "cerrados". 
@@ -151,32 +151,32 @@ Por lo tanto se utilizara dicha clase para albergar los ejemplos de caras que co
 
 Para poder crear nuestras clases cargaremos los conjuntos de datos que utilizaremos. Arrastramos los archivos .zip, que descargamos previamente, al cuadro de la parte superior derecha de la imagen que se muestra a continuación.
 
-[carga]
+![](/././image_workshop/carga.png)
 
 Nota: En la imagen se muestra como un archivo ya se cargo correctamente ("abiertos") y otro esta en proceso de carga ("cerrados").
 
 Una vez que cargamos los archivos corespondientes debemos crear las clases y asignar los datos a las mismas.
 Crearemos una clase y le pondremos como nombre "Cerrados".
 
-[create]
+![](/././image_workshop/create.png)
 
 Luego, arrastramos el archivo que contiene los ejemplos con ojos cerrados a la clase que acabamos de crear y el archivo que contiene los ejemplos de ojos abiertos a la clase negative, tal y como se muestra en la imagen.
 
-[arrastra1]
+![](/././image_workshop/arrastra1.png)
 
 En este punto, ya estamos listos para entrenar nuestro modelo. Para ello clickeamos en "Train Model" y esperamos a que culmine el entrenamiento, este proceso puede demorar unos minutos.
 
 Una vez que culminó la etapa de entrenamiento, es hora de probar nuestro modelo.
 
-[test]
+![](/././image_workshop/test.png)
 
 En la imagen se muestra información general acerca del modelo para comenzar a probarlo debemos ir a la sección "Test".
 
-[testeoaaaa]
+![](/././image_workshop/testeoaaaa.png)
 
 Una vez allí, simplemente debemos arrastrar las imagenes de nuestra carpeta test y ver los resultados.
 
-[arrastratest]
+![](/././image_workshop/arrastratest.png)
 
 
 ## Integrando el código con nuestro modelo
@@ -186,29 +186,37 @@ Una vez allí, simplemente debemos arrastrar las imagenes de nuestra carpeta tes
 Para poder integrar nuestro código con el servicio recién creado, debemos proveer las credenciales correspondientes al servicio.\
 Debemos dirigirnos a la página principal de IBM Cloud y seleccionar la lista de servicios que tenemos instanciados en la cuenta. 
 
-[dashboard]
+![](/././image_workshop/dashboard.png)
 
 Una vez que vemos desplegada la lista de servicios activos que tenemos, seleccionamos el de Visual Recognition que creamos previamente.
 
-[service]
+![](/././image_workshop/service.png)
 
 Una vez que seleccionamos el servicio deseado, veremos las credenciales del mismo. Copiamos la api-key y la pegamos en los archivos "create_classifier.py" y "test_model.py".
 
-[api key]
+![](/././image_workshop/apikey.png)
+
 
 Posteriormente, debemos asignarle un nombre el modelo que vamos a crear, nos dirigimos al archivo create_classifier.py y le asiganmos uno modificando la linea 14.
 
 Una vez completados estos pasos es hora de correr el archivo y ver los resultados, mediante el comando "python3 create_classifier.py" ejecutamos el script y refrescamos IBM Cloud desde el navegador para visualizar los cambios realizados, alli deberiamos ver que se creo un nuevo modelo con el nombre que asignamos, y a su vez obtendremos una salida en consola con los datos del nuevo modelo (notar que el estado del modelo es "training"). 
 
 Luego, es hora de probar el modelo mediante la API. Antes de poder realizarlo debemos especificar el id del modelo que deseamos utilizar, ya que el modelo que acabamos de crear se encuentra en etapa de entrenamiento utilizaremos el modelo que creamos anteriormente desde la consola llamado "eyesClassifier", para obtener dicho id nos dirigimos al menu principal de Watson Studio.
-[goto]
+
+![](/././image_workshop/goto.png)
 
 Seleccionamos Watson Services
-[goto1]
- Y elegimos nuestro servicio
-[goto2]
-Posteriormente, copiamos el id del servicio que creamos desde la interface con nombre "eyesClassifier" 
-[goto3]
+
+![](/././image_workshop/goto1.png)
+
+Y elegimos nuestro servicio
+
+![](/././image_workshop/goto2.png)
+
+Posteriormente, copiamos el id del servicio que creamos desde la interface con nombre "eyesClassifier".
+
+![](/././image_workshop/goto3.png)
+
 Y lo pegamos en el archivo "test_model.py" en la seccion correspondiente (linea 15).
 
 Finalmente, debemos especificar en las variables "PATH_TO_THE_TEST_IMAGE" y "TEST_IMAGE_NAME" el path y nombre de la imagen que queremos clasificar.
