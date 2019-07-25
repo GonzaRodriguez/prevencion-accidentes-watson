@@ -35,7 +35,7 @@ Para la realización de esta tarea utilizaremos, el antes mencionado servicio de
     - createModel.py
     - testModel.py
 - Imágenes para entrenamiento
-- Imágenes para entrenamiento
+- Imágenes para test
 - README.md
 
 
@@ -105,14 +105,14 @@ Para la realización de esta tarea utilizaremos, el antes mencionado servicio de
 ## Arquitectura
 
 <p align="center">
-  <img src="Imágenes/arq_tasador.jpg" width="722" length="500">
+  <img src="image_workshop/download.jpg" width="722" length="500">
 </p>
 
 ## Utilizando Watson Visual Recognition y creando el modelo clasificador multiclase
 
 Ir al catalogo de IBM, y seleccionar "AI".
 
-[catalogo]
+![](/././image_workshop/catalogo.png)
 
 En las opciones que aparecen seleccionamos Watson Visual Recognition.
 
