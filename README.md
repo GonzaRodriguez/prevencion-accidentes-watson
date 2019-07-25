@@ -105,7 +105,7 @@ Para la realización de esta tarea utilizaremos, el antes mencionado servicio de
 ## Arquitectura
 
 <p align="center">
-  <img src="image_workshop/download.jpg" width="722" length="500">
+  <img src="image_workshop/download.png" width="722" length="500">
 </p>
 
 ## Utilizando Watson Visual Recognition y creando el modelo clasificador multiclase
