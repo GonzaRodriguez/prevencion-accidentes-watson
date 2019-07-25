@@ -2,7 +2,7 @@
 # Workshop sobre Watson Visual Recognition - Como prevenir accidentes de transito mediante el reconocimiento de imagenes
 
 <p align="center">
-  <img src="image_workshop/download.png" width="150" length="200">
+  <img src="image_workshop/watson.png" width="150" length="200">
 </p>
 
 ## Flujo
